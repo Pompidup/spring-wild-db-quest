@@ -6,12 +6,6 @@ package com.wildcodeschool.myProjectWithDB.controllers;
         import org.springframework.stereotype.Controller;
         import org.springframework.web.bind.annotation.*;
 
-
-
-
-        import java.sql.Date;
-        import java.util.List;
-
 @Controller
 @ResponseBody
 public class SchoolsController {
@@ -46,5 +40,10 @@ public class SchoolsController {
                 country != null ?country : schools.getCountry()
         );
         return SchoolsRepository.selectById(id);
+    }
+
+    @DeleteMapping("/api/schools/{id}")
+    public void delete(@PathVariable int id) {
+        SchoolsRepository.delete(id);
     }
 }

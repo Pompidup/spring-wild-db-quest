@@ -30,4 +30,21 @@ public class SchoolsController {
         );
         return SchoolsRepository.selectById(idGeneratedByInsertion);
     }
+
+    @PutMapping("/api/schools/{id}")
+    public Schools update(
+            @PathVariable int id,
+            @RequestParam String name,
+            @RequestParam Integer capacity,
+            @RequestParam String country
+    ) {
+        Schools schools = SchoolsRepository.selectById(id);
+        SchoolsRepository.update(
+                id,
+                name != null ? name : schools.getName(),
+                capacity != null ? capacity : schools.getCapacity(),
+                country != null ?country : schools.getCountry()
+        );
+        return SchoolsRepository.selectById(id);
+    }
 }
